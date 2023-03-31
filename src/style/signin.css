@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fef6e4;
+}
+
+.form{
+    width: 40%;
+    height: auto;
+    margin: 50px;
+    padding: 30px;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3d2c1;
+    /*box-shadow: 5px 5px 50px 1px #f3d2c1;*/
+    border-radius: 2%; 
+}
+
+.Signin{
+    margin-bottom: 10px;
+    border-bottom: 1px solid #001858;
+}
+
+.form form{
+    text-align: center;
+    margin: 20px 0 ;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    align-content: center;
+    
+}
+
+.form form input{
+    width: 100%;
+    height: 100%;
+    margin: 5px 0 5px;
+    padding: 10px;
+    outline: 0;
+    border: 0;
+    background-color: #fff;
+}
+
+.form form button{
+    width: 100%;
+    height: 100%;
+    margin: 20px 0 ;
+    padding: 10px;
+    font-size: 20px;
+    color: #001858;
+    outline: 0;
+    border: 0;
+    background: #f582ae;
+}
+
+.form form p{
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.form form a{
+    width: 60%;
+    height: 100%;
+    margin-bottom: 10px;
+    padding: 0 40px;
+    background: #001858;
+    color: white;
+    outline: none;
+    text-decoration: none;
+}
+
+
+
