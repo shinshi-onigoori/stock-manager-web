@@ -1,29 +1,116 @@
 import React from 'react';
-import "./signin.css"
+import styled from "styled-components";
 
 function Signin() {
+    const Container = styled.div`
+        width: 100%;
+        height: 100vh;
+        box-sizing: border-box;
+  `;
+
+    const Main = styled.div`
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(156, 232, 255);
+    `;
+
+    const FormBackground = styled.div`
+        max-width: 370px;
+        min-width: 200px;
+        width: 30%;
+        height: 230px;
+        padding: 40px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        border-radius: 10px;    
+    `;
+
+    const FormContainer = styled.section`
+        text-align: center;
+        box-sizing: border-box;
+    `;
+
+    const EmailInput = styled.div`
+        input{
+            padding: 10px;
+            margin-top: 20px ;
+            box-sizing: border-box;
+            font-size: 18px;
+            background-color: #f0f0f0;
+            border: 0;
+        }
+    `;
+
+    const PasswordInput = styled.div`
+        input{
+            padding: 10px;
+            margin: 20px 0px;
+            box-sizing: border-box;
+            font-size: 18px;
+            background-color: #f0f0f0;
+            border: 0;
+        }
+    `;
+
+    const SigninButton = styled.div`
+        a{          
+            width: 225px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            margin: 20px 0px;
+            padding: 10px 0px;
+            color: #fff;
+            background-color: rgb(0, 140, 255);
+            border-radius: 30px;
+            transition: 0.5s;
+            
+            :hover{
+                background-color: #fff;
+                border: 1px solid rgb(0, 140, 255);
+                color: rgb(0, 140, 255);
+            }
+        }
+        `;
+
+    const SignupButton = styled.div`
+        a{
+            text-decoration: none;
+            color: rgb(0, 140, 255);
+            transition: 0.5s;
+            :hover{
+                color:rgb(0, 38, 255)
+            }
+        }
+    `;
+
     return (
-        <div className="signin_container">
-            <div className="signin_main">
+        <Container>
+            <Main>
                 {/* ここからSigninのエリア */}
-                <div className="signin_block_back">
-                    <section className="signin_block">
-                        <div className="signin_Adress">
+                <FormBackground>
+                    <FormContainer>
+                        <EmailInput>
                             <input type="email" placeholder='email' />
-                        </div>
-                        <div className="signin_password">
-                            <input type="password" placeholder='passward'/>
-                        </div>
-                        <div className="signin_button">
+                        </EmailInput>
+                        <PasswordInput>
+                            <input type="password" placeholder='passward' />
+                        </PasswordInput>
+                        <SigninButton>
                             <a href="#">Signin</a>
-                        </div>
-                        <div className="move_signup_button">
+                        </SigninButton>
+                        <SignupButton>
                             <a href="#">Create New Account</a>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </div>
+                        </SignupButton>
+                    </FormContainer>
+                </FormBackground>
+            </Main>
+        </Container>
 
     );
 }
