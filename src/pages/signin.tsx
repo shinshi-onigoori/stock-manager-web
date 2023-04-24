@@ -89,39 +89,35 @@ const SignupButton = styled.div`
     }
 `;
 
+async function handleClickSigninButton(emailInputed: string, passwordInputed: string) {
+    const requestBody: SigninRequest = {
+        email: emailInputed,
+        password: passwordInputed
+    }
+    const apiHost = "http://localhost:8080";
+    const apiUrl = `${apiHost}/auth/signin`;
+    const apiRequest = {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json;charset=UTF-8',
+        },
+        body: JSON.stringify(requestBody),
+    };
+    const response = await fetch(apiUrl, apiRequest);
+    const data: SigninResponse = await response.json();
+    console.log(data.message);
+    console.log(data.token);
+    console.log(data.displayName);
+}
+
+function handleChangeState(event: React.ChangeEvent<HTMLInputElement>, setStateFunction: React.Dispatch<React.SetStateAction<string>>) {
+    setStateFunction(event.target.value);
+}
+
 function Signin() {
 
-    const [emailInputed, setEmailInputed] = useState("");
-    const [passwordInputed, setPasswordInputed] = useState("");
-
-    async function handleClickSigninButton() {
-        const requestBody: SigninRequest = {
-            email: emailInputed,
-            password: passwordInputed
-        }
-        const apiHost = "http://localhost:8080";
-        const apiUrl = `${apiHost}/auth/signin`;
-        const apiRequest = {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json;charset=UTF-8',
-            },
-            body: JSON.stringify(requestBody),
-        };
-        const response = await fetch(apiUrl, apiRequest);
-        const data: SigninResponse = await response.json();
-        console.log(data.message);
-        console.log(data.token);
-        console.log(data.displayName);
-    }
-
-    function handleChangeEmail(event: React.ChangeEvent<HTMLInputElement>) {
-        setEmailInputed(event.target.value);
-    }
-
-    function handleChangePassword(event: React.ChangeEvent<HTMLInputElement>) {
-        setPasswordInputed(event.target.value);
-    }
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     return (
         <Container>
@@ -130,13 +126,24 @@ function Signin() {
                 <FormBackground>
                     <FormContainer>
                         <EmailInput>
-                            <input type="email" placeholder='email' onChange={handleChangeEmail} value={emailInputed} />
+                            <input
+                                type="email"
+                                placeholder='email'
+                                onChange={(event) => handleChangeState(event, setEmail)}
+                                value={email} />
                         </EmailInput>
                         <PasswordInput>
-                            <input type="password" placeholder='password' onChange={handleChangePassword} value={passwordInputed} />
+                            <input
+                                type="password"
+                                placeholder='password'
+                                onChange={(event) => handleChangeState(event, setPassword)}
+                                value={password} />
                         </PasswordInput>
                         <SigninButton>
-                            <button onClick={handleClickSigninButton}>Signin</button>
+                            <button
+                                onClick={() => handleClickSigninButton(email, password)}>
+                                Signin
+                            </button>
                         </SigninButton>
                         <SignupButton>
                             <a href="#">Create New Account</a>
