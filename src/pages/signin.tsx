@@ -91,34 +91,36 @@ const SignupButton = styled.div`
 
 function Signin() {
 
-    const[email, setEmail] = useState("");
-    const[password, setPassword] = useState("");
+    const [emailInputed, setEmailInputed] = useState("");
+    const [passwordInputed, setPasswordInputed] = useState("");
 
     async function handleClickSigninButton() {
         const requestBody: SigninRequest = {
-            email: email,
-            password: password
+            email: emailInputed,
+            password: passwordInputed
         }
         const apiHost = "http://localhost:8080";
-        const response = await fetch(`${apiHost}/auth/signin`, {
+        const apiUrl = `${apiHost}/auth/signin`;
+        const apiRequest = {
             method: 'POST',
             headers: {
-              'content-type': 'application/json;charset=UTF-8',
+                'content-type': 'application/json;charset=UTF-8',
             },
             body: JSON.stringify(requestBody),
-          });
+        };
+        const response = await fetch(apiUrl, apiRequest);
         const data: SigninResponse = await response.json();
         console.log(data.message);
         console.log(data.token);
         console.log(data.displayName);
     }
-    
-    function handleChangeEmail(event:React.ChangeEvent<HTMLInputElement>) {
-        setEmail(event.target.value);
+
+    function handleChangeEmail(event: React.ChangeEvent<HTMLInputElement>) {
+        setEmailInputed(event.target.value);
     }
 
-    function handleChangePassword(event:React.ChangeEvent<HTMLInputElement>) {
-        setPassword(event.target.value);
+    function handleChangePassword(event: React.ChangeEvent<HTMLInputElement>) {
+        setPasswordInputed(event.target.value);
     }
 
     return (
@@ -127,15 +129,15 @@ function Signin() {
                 {/* ここからSigninのエリア */}
                 <FormBackground>
                     <FormContainer>
-                            <EmailInput>
-                                <input type="email" placeholder='email' onChange={handleChangeEmail} value={email}/>
-                            </EmailInput>
-                            <PasswordInput>
-                                <input type="password" placeholder='password' onChange={handleChangePassword} value={password}/>
-                            </PasswordInput>
-                            <SigninButton>
-                                <button onClick={handleClickSigninButton}>Signin</button>
-                            </SigninButton>
+                        <EmailInput>
+                            <input type="email" placeholder='email' onChange={handleChangeEmail} value={emailInputed} />
+                        </EmailInput>
+                        <PasswordInput>
+                            <input type="password" placeholder='password' onChange={handleChangePassword} value={passwordInputed} />
+                        </PasswordInput>
+                        <SigninButton>
+                            <button onClick={handleClickSigninButton}>Signin</button>
+                        </SigninButton>
                         <SignupButton>
                             <a href="#">Create New Account</a>
                         </SignupButton>
