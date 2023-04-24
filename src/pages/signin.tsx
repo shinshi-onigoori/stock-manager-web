@@ -116,8 +116,8 @@ function handleChangeState(event: React.ChangeEvent<HTMLInputElement>, setStateF
 
 function Signin() {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
     return (
         <Container>
