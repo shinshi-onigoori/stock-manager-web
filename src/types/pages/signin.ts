@@ -9,4 +9,5 @@ export type SigninResponse = {
     message: string
     token: string
     displayName: string
+    userId: string
 }

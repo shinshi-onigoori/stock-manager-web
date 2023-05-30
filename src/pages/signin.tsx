@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from "styled-components";
-import { SigninRequest, SigninResponse } from '../types/signin';
+import { SigninRequest, SigninResponse } from '../types/pages/signin';
+import { UserContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const Container = styled.div`
         width: 100%;
@@ -89,32 +92,37 @@ const SignupButton = styled.div`
     }
 `;
 
-async function handleClickSigninButton(emailInputed: string, passwordInputed: string) {
-    const requestBody: SigninRequest = {
-        email: emailInputed,
-        password: passwordInputed
-    }
-    const apiHost = "http://localhost:8080";
-    const apiUrl = `${apiHost}/auth/signin`;
-    const apiRequest = {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json;charset=UTF-8',
-        },
-        body: JSON.stringify(requestBody),
-    };
-    const response = await fetch(apiUrl, apiRequest);
-    const data: SigninResponse = await response.json();
-    console.log(data.message);
-    console.log(data.token);
-    console.log(data.displayName);
-}
-
 function handleChangeState(event: React.ChangeEvent<HTMLInputElement>, setStateFunction: React.Dispatch<React.SetStateAction<string>>) {
     setStateFunction(event.target.value);
 }
 
 function Signin() {
+    const userCtx = useContext(UserContext)
+    const authCtx = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    async function handleClickSigninButton(emailInputed: string, passwordInputed: string) {
+        const requestBody: SigninRequest = {
+            email: emailInputed,
+            password: passwordInputed
+        }
+        const apiHost = "http://localhost:8080";
+        const apiUrl = `${apiHost}/auth/signin`;
+        const apiRequest = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json;charset=UTF-8',
+            },
+            body: JSON.stringify(requestBody),
+        };
+        const response = await fetch(apiUrl, apiRequest);
+        const data: SigninResponse = await response.json();
+        if (response.status === 200) {
+            userCtx.setUserFunc({ displayName: data.displayName, id: data.userId })
+            authCtx.saveTokenFunc(data.token)
+            navigate("/home")
+        }
+    }
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
